@@ -1,2 +1,2 @@
-# spotknack_3
-web project
+# Spotknack_task
+webpage frontend

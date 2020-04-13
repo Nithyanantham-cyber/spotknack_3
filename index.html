@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>repEAT - Eat Sleep Repeat</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.2/semantic.css'>
+  
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Baloo+2|Poppins&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.2/semantic.js'></script>
+<link rel="stylesheet" href="index_styles.css">
+  <script src="Js/index.js"></script>
+</head>
+
+<body >
+<!-- Side Bar-->
+<div class="ui grid" id="foods">
+
+
+<div class="two wide column">
+    <div class="ui left demo vertical sidebar labeled icon menu visible " style="
+    width: inherit">
+      <a class="item"><h1>repEAT</h1></a>
+      <a class="item">
+        <img class="tiny ui avatar image" src="images/man.png"><br><br>
+        <span>Hello Mate!</span>
+      </a>
+      <a class="item">
+        <button class="  ui button">Compose Meal</button>
+      </a>
+      <a class="item"> Overview</a>
+      <a class="item"> Meals</a>
+      <a class="item"> User account</a>
+      <a class="item">Logout</a>
+    </div>
+  </div>
+
+<div class="ten wide column">
+<!-- Site Content-->
+<div  class="">
+  <div class="top ui secondary menu" style="margin: 50px">
+    <a class="item"><h3>Profile</h3></a>
+  <div class="ui search" >
+    <div class="ui icon input">
+      <input class="prompt" type="text" placeholder="Search dishes..." v-model="searchText">
+      <i class="search icon"></i>
+    </div>
+    <div class="results"></div>
+  </div>
+ <!-- right Menu-->
+  <div class="right menu">
+    <a class="item">
+     	<div class="ui green toggle checkbox">
+        	<input type="checkbox" name="public" v-model="meat">
+        	<label>Meat</label>
+  	  </div>
+    </a>
+    <a class="item">
+      <div class="ui green toggle checkbox">
+        <input type="checkbox" name="public" v-model="veg">
+        <label>Veg</label>
+      </div>
+    </a>
+  </div>
+</div>
+
+
+<div class="ui container grid">
+  <div class="ui container">
+      <h1 class="huge ui header" style="font-family: 'Baloo 2', cursive;">Today's Options</h1>
+      <h6 class="tiny ui header" style="font-family: 'Baloo 2', cursive;">Click Add to add items to the cart<i class="exclamation circle icon"></i></h6> 
+      
+      <!--Navbar-->
+      <div class="ui secondary pointing menu">
+        <button class="item" v-on:click="filt()">All cusines</button>
+        <button class="item" v-on:click="filt('Italian')">Italian</button>
+        <button class="item" v-on:click="filt('Chinese')">Chinese</button>
+        <button class="item" v-on:click="filt('Indian')" >Indian</button>
+        <button class="item" v-on:click="filt('Greek')">Greek</button>
+        <button class="item" v-on:click="filt('French')">French</button>
+      </div>
+    </div>
+
+  <div class="sixteen wide column">
+    
+    <div  class="ui celled list" >
+      <div class="item" v-for="item in filteredSongs">
+        <img class="ui small image" :src=item.image>
+        <div class="content" style="padding: 15px">
+          <h1 class="huge ui header" >{{item.name}}</h1>
+          <div class="desc">{{item.desc}}</div>
+          <div class="ui circular labels" style="padding: 3px;">
+            <a class="ui label">{{item.type}}</a>
+            <a class="ui label">{{item.cuisine}}</a>
+          </div>
+        </div>
+
+        <div class="right floated content">
+          <h1 class="huge ui header money">{{item.price}} $</h1>
+         <button class="ui labeled icon button" v-on:click="addCart(item.id,$event)">
+            <i class="add icon"></i>
+            Add
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  </div>
+ 
+
+
+
+  </div>
+  <div style="display:none">
+  {{filterCuisine}}
+   </div>
+</div>
+
+ <div class="four wide column" >
+    <!-- Cart -->
+    <div class="ui right demo vertical sidebar labeled icon menu visible " style="
+    width: inherit; padding:50px">
+   <h2>Cart</h2>
+    <div class="ui segment">
+      <p>
+        <h2 v-if="cart.length > 0">
+          <div v-for="item in cart">
+           <div class="ui big label" style="margin: 5px">
+              {{item.name}}<i class="icon close" v-on:click="deleteCart(item.name)"></i>
+            </div>
+          </div>
+        </h2>
+       </p>
+    </div>
+
+     <!-- payment -->
+      <div class="ui segment">
+      <p>
+        <h2>Payment</h2>
+        <h1>Total : {{total}} $</h1>
+        <button class="fluid ui button" style="margin: 5px">
+          <i class="cc mastercard icon"></i>Master Card
+        </button>
+        <button class="fluid positive ui button" style="margin: 5px">Pay</button>
+      </p>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+<script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.2/semantic.js'></script>
+<script  src="Js/engine.js"></script>
+</body>
+</html>
